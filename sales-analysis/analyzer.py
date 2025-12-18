@@ -1,0 +1,41 @@
+# analyzer.py
+import pandas as pd
+from helpers import calculate_total, format_currency
+
+"""
+
+
+import sys
+print(sys.path)   # List of folders Python checks
+
+import sys
+import os
+
+# Go up one level from current script
+parent = os.path.dirname(os.path.dirname(__file__))
+sys.path.append(parent)
+"""
+
+# Read data
+df = pd.read_csv('data/sales.csv')
+
+
+# Calculate total for each row
+totals = []
+for index, row in df.iterrows():
+    total = calculate_total(row['quantity'], row['price'])
+    totals.append(total)
+
+# Add totals to our data
+df['total'] = totals
+
+# Display with formatted totals
+print("Sales Data:")
+for index, row in df.iterrows():
+    formatted_total = format_currency(row['total'])
+    print(f"{row['product']}: {formatted_total}")
+
+# Show grand total
+grand_total = df['total'].sum()
+formatted_grand_total = format_currency(grand_total)
+print(f"\nGrand Total: {formatted_grand_total}")

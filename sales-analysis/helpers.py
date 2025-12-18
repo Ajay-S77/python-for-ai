@@ -2,7 +2,7 @@
 ########
 def calculate_total(quantity, price):
     """Calculate total for a single item"""
-    return quantity * price
+    return quantity * price + 1
 
 
 def format_currency(amount):
